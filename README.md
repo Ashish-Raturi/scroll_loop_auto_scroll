@@ -1,10 +1,10 @@
 # Scroll Loop Auto Scroll
 
-A Flutter widget that scrolls widgets infinitely in any direction.
+This widget automatically scrolls the custom child widget to an infinite loop.
 
 ## Example
 
-<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/blob/master/doc/example.gif" height="400" />
+<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/example.gif" height="400" />
 
 ## Features
 * Infinite Auto Scroll
@@ -15,7 +15,7 @@ A Flutter widget that scrolls widgets infinitely in any direction.
 
 ## Installation
 
-Add `scroll_loop_auto_scroll: ^0.0.1` to your `pubspec.yaml` dependencies. And import it:
+Add `scroll_loop_auto_scroll: ^0.0.2` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';

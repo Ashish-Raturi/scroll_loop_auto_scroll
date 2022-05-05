@@ -1,7 +1,7 @@
 name: scroll_loop_auto_scroll
-description: A Flutter widget that scrolls widget infinitely in any direction. Provides many customizations, including custom scroll directions, pausing / delay after every round, and specifying custom durations and gap.
-version: 0.0.1
-homepage:
+description: This widget automatically scrolls the custom child widget to an infinite loop.
+version: 0.0.2
+homepage: https://github.com/Ashish-Raturi/scroll_loop_auto_scroll
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
