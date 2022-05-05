@@ -11,6 +11,11 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
+<p> <imgsrc="https://github.com/AshishRaturi/scroll_loop_auto_scroll/blob/master/doc/example.gif?raw=true"
+    alt="An animated image of the iOS in-app purchase UI" height="400"/>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+</p>
+
 TODO: Put a short description of the package here that helps potential users
 know whether this package might be useful for them.
 
