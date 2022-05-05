@@ -1,6 +1,6 @@
 # Scroll Loop Auto Scroll
 
-A Flutter widget that scrolls widget infinitely in any direction. Provides many customizations, including custom scroll directions, pausing / delay after every round, and specifying custom durations and gap.
+A Flutter widget that scrolls widgets infinitely in any direction.
 
 ## Example
 
@@ -9,7 +9,9 @@ A Flutter widget that scrolls widget infinitely in any direction. Provides many 
 ## Features
 * Infinite Auto Scroll
 * Custom child widgets
+* Delay after every round
 * Custom scroll direction
+* Specifying custom durations and gap
 
 ## Installation
 
