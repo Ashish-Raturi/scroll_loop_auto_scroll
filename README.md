@@ -1,40 +1,53 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Scroll Loop Auto Scroll
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+A Flutter widget that scrolls widget infinitely in any direction. Provides many customizations, including custom scroll directions, pausing / delay after every round, and specifying custom durations and gap.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/blob/master/doc/example.mp4" height="400" />
+## Example
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/blob/master/doc/example.gif" height="400" />
 
 ## Features
+* Infinite Auto Scroll
+* Custom child widgets
+* Custom scroll direction
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+## Installation
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Add `scroll_loop_auto_scroll: ^0.0.1` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
-const like = 'sample';
+import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 ```
 
-## Additional information
+## How to use
+Simply create a `ScrollLoopAutoScroll` widget, and pass the required params:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+  ScrollLoopAutoScroll(
+    child: Text(
+      'Very long text that bleeds out of the rendering space',
+      style: TextStyle(fontSize: 20),
+    ),
+    scrollDirection: Axis.horizontal,
+  )
+```
+
+
+## Params
+
+```dart
+
+ScrollLoopAutoScroll(
+   child: child,
+   delay: Duration(seconds: 1),
+   disableAnimation: false,
+   duration: Duration(seconds: 10),
+   gap: 25,
+   pause: Duration(seconds: 5),
+   scrollDirection: Axis.horizontal
+ )
+```
+
+## License
+
+MIT
