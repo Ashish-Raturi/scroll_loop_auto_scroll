@@ -4,7 +4,7 @@ This widget automatically scrolls the custom child widget to an infinite loop.
 
 ## Example
 
-<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/example.gif" height="500" />
+<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/example.gif" height="580" />
 
 ## Features
 * Infinite Auto Scroll
