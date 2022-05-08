@@ -1,9 +1,9 @@
 
-## 0.0.3
+## v0.0.4
 
 * Reverse scroll added.
 
-## 0.0.2
+## v0.0.2
 
 * Example gif added.
 

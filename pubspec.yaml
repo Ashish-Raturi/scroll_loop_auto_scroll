@@ -1,6 +1,6 @@
 name: scroll_loop_auto_scroll
 description: This widget automatically scrolls the custom child widget to an infinite loop.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/Ashish-Raturi/scroll_loop_auto_scroll
 
 environment:
@@ -15,6 +15,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
