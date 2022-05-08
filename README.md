@@ -12,10 +12,11 @@ This widget automatically scrolls the custom child widget to an infinite loop.
 * Delay after every round
 * Custom scroll direction
 * Specifying custom durations and gap
+* Like for more features
 
 ## Installation
 
-Add `scroll_loop_auto_scroll: ^0.0.2` to your `pubspec.yaml` dependencies. And import it:
+Add `scroll_loop_auto_scroll: ^0.0.3` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';

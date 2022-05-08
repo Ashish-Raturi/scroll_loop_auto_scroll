@@ -10,9 +10,9 @@ class ScrollLoopAutoScroll extends StatefulWidget {
       this.disableAnimation = false,
       this.duration = const Duration(seconds: 10),
       this.gap = 25,
-      this.id,
       this.pause = const Duration(seconds: 5),
-      this.scrollDirection = Axis.horizontal})
+      this.scrollDirection = Axis.horizontal,
+      this.reverseScroll = false})
       : super(key: key);
 
   /// Widget to display in loop
@@ -23,6 +23,8 @@ class ScrollLoopAutoScroll extends StatefulWidget {
   /// Duration to wait before starting animation
   ///
   /// Default set to Duration(seconds: 1).
+  ///
+
   final Duration delay;
 
   /// If animation should be stopped and position reset
@@ -40,9 +42,6 @@ class ScrollLoopAutoScroll extends StatefulWidget {
   /// Default set to 25.
   final double gap;
 
-  /// Used to track widget instance and prevent rebuilding unnecessarily if parent rebuilds
-  final String? id;
-
   /// Time to pause animation inbetween loops
   ///
   /// Default set to Duration(seconds: 5).
@@ -53,6 +52,16 @@ class ScrollLoopAutoScroll extends StatefulWidget {
   /// Default set to [Axis.horizontal].
   final Axis scrollDirection;
 
+  ///
+  /// true : Right to Left
+  ///
+  // |___________________________<--Scrollbar-Starting-Right-->|
+  ///
+  /// fasle : Left to Right (Default)
+  ///
+  // |<--Scrollbar-Starting-Left-->____________________________|
+  final bool reverseScroll;
+
   @override
   State<ScrollLoopAutoScroll> createState() => _ScrollLoopAutoScrollState();
 }
@@ -60,15 +69,14 @@ class ScrollLoopAutoScroll extends StatefulWidget {
 class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
     with SingleTickerProviderStateMixin {
   late final AnimationController animationController;
-  late final Animation<Offset> offset;
-  late final ScrollController scrollController;
+  late Animation<Offset> offset;
 
-  String id = '';
   ValueNotifier<bool> shouldScroll = ValueNotifier<bool>(false);
+  late final ScrollController scrollController;
 
   @override
   void initState() {
-    id = widget.id ?? DateTime.now().toString();
+    scrollController = ScrollController();
 
     animationController = AnimationController(
       duration: widget.duration,
@@ -78,35 +86,19 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
     offset = Tween<Offset>(
       begin: Offset.zero,
       end: widget.scrollDirection == Axis.horizontal
-          ? const Offset(-.5, 0)
-          : const Offset(0, -.5),
+          ? widget.reverseScroll
+              ? const Offset(.5, 0)
+              : const Offset(-.5, 0)
+          : widget.reverseScroll
+              ? const Offset(0, .5)
+              : const Offset(0, -.5),
     ).animate(animationController);
-
-    scrollController = ScrollController();
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       animationHandler();
     });
 
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant ScrollLoopAutoScroll oldWidget) {
-    id = widget.id ?? DateTime.now().toString();
-
-    if (!shouldScroll.value || oldWidget.id != id) {
-      animationController.reset();
-      shouldScroll.value = false;
-    }
-
-    if (!widget.disableAnimation && oldWidget.id != id) {
-      WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-        animationHandler();
-      });
-    }
-
-    super.didUpdateWidget(oldWidget);
   }
 
   animationHandler() async {
@@ -134,6 +126,7 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
       controller: scrollController,
       physics: const NeverScrollableScrollPhysics(),
       scrollDirection: widget.scrollDirection,
+      reverse: widget.reverseScroll,
       child: SlideTransition(
         position: offset,
         child: ValueListenableBuilder<bool>(
@@ -144,34 +137,48 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          right: shouldScroll ? widget.gap : 0,
-                        ),
+                            right: shouldScroll && !widget.reverseScroll
+                                ? widget.gap
+                                : 0,
+                            left: shouldScroll && widget.reverseScroll
+                                ? widget.gap
+                                : 0),
                         child: widget.child,
                       ),
-                      if (shouldScroll)
-                        Padding(
-                          padding: EdgeInsets.only(
-                            right: widget.gap,
-                          ),
-                          child: widget.child,
-                        ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            right: shouldScroll && !widget.reverseScroll
+                                ? widget.gap
+                                : 0,
+                            left: shouldScroll && widget.reverseScroll
+                                ? widget.gap
+                                : 0),
+                        child: widget.child,
+                      ),
                     ],
                   )
                 : Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(
-                          bottom: shouldScroll ? widget.gap : 0,
-                        ),
+                            bottom: shouldScroll && !widget.reverseScroll
+                                ? widget.gap
+                                : 0,
+                            top: shouldScroll && widget.reverseScroll
+                                ? widget.gap
+                                : 0),
                         child: widget.child,
                       ),
-                      if (shouldScroll)
-                        Padding(
-                          padding: EdgeInsets.only(
-                            bottom: widget.gap,
-                          ),
-                          child: widget.child,
-                        ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            bottom: shouldScroll && !widget.reverseScroll
+                                ? widget.gap
+                                : 0,
+                            top: shouldScroll && widget.reverseScroll
+                                ? widget.gap
+                                : 0),
+                        child: widget.child,
+                      ),
                     ],
                   );
           },
