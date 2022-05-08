@@ -41,13 +41,13 @@ Simply create a `ScrollLoopAutoScroll` widget, and pass the required params:
 ```dart
 
 ScrollLoopAutoScroll(
-   child: child,
+   child: child,//required
+   scrollDirection: Axis.horizontal,//required
    delay: Duration(seconds: 1),
    disableAnimation: false,
    duration: Duration(seconds: 10),
    gap: 25,
    pause: Duration(seconds: 5),
-   scrollDirection: Axis.horizontal,
    reverseScroll: false
  )
 ```
