@@ -47,7 +47,8 @@ ScrollLoopAutoScroll(
    duration: Duration(seconds: 10),
    gap: 25,
    pause: Duration(seconds: 5),
-   scrollDirection: Axis.horizontal
+   scrollDirection: Axis.horizontal,
+   reverseScroll: false
  )
 ```
 
