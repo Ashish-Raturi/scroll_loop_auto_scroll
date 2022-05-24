@@ -56,9 +56,9 @@ ScrollLoopAutoScroll(
 
 ## Improve Your Flutter Skills
 
-Go to www.gappsolution.com and learn all about payments.
+Go to [www.gappsolution.com](https://www.gappsolution.com/login#mycourse) and learn all about payments.
 
-[<img alt="alt_text" src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" />](https://www.gappsolution.com/)
+[<img alt="alt_text" src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" />](https://www.gappsolution.com/login#mycourse)
 <!-- <img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" /> -->
 
 ## License
