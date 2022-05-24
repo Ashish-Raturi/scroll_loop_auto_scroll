@@ -58,7 +58,7 @@ ScrollLoopAutoScroll(
 
 Go to [www.gappsolution.com](https://www.gappsolution.com/login#mycourse) and learn all about payments.
 
-[<img alt="alt_text" src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" />](https://www.gappsolution.com/login#mycourse)
+[<img alt="alt_text" src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/image.jpg" height="300" />](https://www.gappsolution.com/login#mycourse)
 <!-- <img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" /> -->
 
 ## License
