@@ -10,7 +10,7 @@ This widget automatically scrolls the custom child widget to an infinite loop.
 <img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/example.gif" height="600" />
 
 ## Features
-* User scroll input
+* User scroll input 🆕
 * Infinite Auto Scroll
 * Custom child widgets
 * Custom scroll direction
