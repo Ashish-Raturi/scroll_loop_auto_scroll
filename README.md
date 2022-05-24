@@ -54,6 +54,9 @@ ScrollLoopAutoScroll(
  )
 ```
 
+## Improve Your Flutter Skills
+<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" />
+
 ## License
 
 MIT
