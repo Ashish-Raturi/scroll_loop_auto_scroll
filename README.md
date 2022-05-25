@@ -47,7 +47,7 @@ ScrollLoopAutoScroll(
    child: child, //required
    scrollDirection: Axis.horizontal, //required
    delay: Duration(seconds: 1),
-   duration: Duration(seconds: 10),
+   duration: Duration(seconds: 50),
    gap: 25,
    reverseScroll: false,
    duplicateChild : 25,
