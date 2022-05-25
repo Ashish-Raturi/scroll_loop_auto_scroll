@@ -3,17 +3,18 @@ library scroll_loop_auto_scroll;
 import 'package:flutter/material.dart';
 
 class ScrollLoopAutoScroll extends StatefulWidget {
-  const ScrollLoopAutoScroll(
-      {required this.child,
-      Key? key,
-      this.delay = const Duration(seconds: 1),
-      this.disableAnimation = false,
-      this.duration = const Duration(seconds: 10),
-      this.gap = 25,
-      this.pause = const Duration(seconds: 5),
-      this.scrollDirection = Axis.horizontal,
-      this.reverseScroll = false})
-      : super(key: key);
+  const ScrollLoopAutoScroll({
+    required this.child,
+    required this.scrollDirection,
+    Key? key,
+    this.delay = const Duration(seconds: 1),
+    this.duration = const Duration(seconds: 50),
+    this.gap = 25,
+    this.reverseScroll = false,
+    this.duplicateChild = 25,
+    this.enableScrollInput = true,
+    this.delayAfterScrollInput = const Duration(seconds: 1),
+  }) : super(key: key);
 
   /// Widget to display in loop
   ///
@@ -27,14 +28,9 @@ class ScrollLoopAutoScroll extends StatefulWidget {
 
   final Duration delay;
 
-  /// If animation should be stopped and position reset
-  ///
-  /// Default set to false.
-  final bool disableAnimation;
-
   /// Duration of animation
   ///
-  /// Default set to Duration(seconds: 10).
+  /// Default set to Duration(seconds: 30).
   final Duration duration;
 
   /// Sized between end of child and beginning of next child instance
@@ -42,14 +38,9 @@ class ScrollLoopAutoScroll extends StatefulWidget {
   /// Default set to 25.
   final double gap;
 
-  /// Time to pause animation inbetween loops
-  ///
-  /// Default set to Duration(seconds: 5).
-  final Duration pause;
-
   /// The axis along which the scroll view scrolls.
   ///
-  /// Default set to [Axis.horizontal].
+  /// required
   final Axis scrollDirection;
 
   ///
@@ -62,6 +53,22 @@ class ScrollLoopAutoScroll extends StatefulWidget {
   // |<--Scrollbar-Starting-Left-->____________________________|
   final bool reverseScroll;
 
+  /// The number of times duplicates child. So when the user scrolls then, he can't find the end.
+  ///
+  /// Default set to 25.
+  ///
+  final int duplicateChild;
+
+  ///User scroll input
+  ///
+  ///Default set to true
+  final bool enableScrollInput;
+
+  /// Duration to wait before starting animation, after user scroll Input.
+  ///
+  /// Default set to Duration(seconds: 1).
+  ///
+  final Duration delayAfterScrollInput;
   @override
   State<ScrollLoopAutoScroll> createState() => _ScrollLoopAutoScrollState();
 }
@@ -77,6 +84,17 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
   @override
   void initState() {
     scrollController = ScrollController();
+
+    scrollController.addListener(() async {
+      if (widget.enableScrollInput) {
+        if (animationController.isAnimating) {
+          animationController.stop();
+        } else {
+          await Future.delayed(widget.delayAfterScrollInput);
+          animationHandler();
+        }
+      }
+    });
 
     animationController = AnimationController(
       duration: widget.duration,
@@ -94,7 +112,8 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
               : const Offset(0, -.5),
     ).animate(animationController);
 
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Future.delayed(widget.delay);
       animationHandler();
     });
 
@@ -105,12 +124,9 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
     if (scrollController.position.maxScrollExtent > 0) {
       shouldScroll.value = true;
 
-      await Future.delayed(widget.delay);
-
       if (shouldScroll.value && mounted) {
         animationController.forward().then((_) async {
           animationController.reset();
-          await Future.delayed(widget.pause);
 
           if (shouldScroll.value && mounted) {
             animationHandler();
@@ -123,8 +139,10 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: widget.enableScrollInput
+          ? const BouncingScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
       controller: scrollController,
-      physics: const NeverScrollableScrollPhysics(),
       scrollDirection: widget.scrollDirection,
       reverse: widget.reverseScroll,
       child: SlideTransition(
@@ -134,53 +152,32 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
           builder: (BuildContext context, bool shouldScroll, _) {
             return widget.scrollDirection == Axis.horizontal
                 ? Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: shouldScroll && !widget.reverseScroll
-                                ? widget.gap
-                                : 0,
-                            left: shouldScroll && widget.reverseScroll
-                                ? widget.gap
-                                : 0),
-                        child: widget.child,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            right: shouldScroll && !widget.reverseScroll
-                                ? widget.gap
-                                : 0,
-                            left: shouldScroll && widget.reverseScroll
-                                ? widget.gap
-                                : 0),
-                        child: widget.child,
-                      ),
-                    ],
-                  )
+                    children: List.generate(
+                        widget.duplicateChild,
+                        (index) => Padding(
+                              padding: EdgeInsets.only(
+                                  right: shouldScroll && !widget.reverseScroll
+                                      ? widget.gap
+                                      : 0,
+                                  left: shouldScroll && widget.reverseScroll
+                                      ? widget.gap
+                                      : 0),
+                              child: widget.child,
+                            )))
                 : Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: shouldScroll && !widget.reverseScroll
-                                ? widget.gap
-                                : 0,
-                            top: shouldScroll && widget.reverseScroll
-                                ? widget.gap
-                                : 0),
-                        child: widget.child,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                            bottom: shouldScroll && !widget.reverseScroll
-                                ? widget.gap
-                                : 0,
-                            top: shouldScroll && widget.reverseScroll
-                                ? widget.gap
-                                : 0),
-                        child: widget.child,
-                      ),
-                    ],
-                  );
+                    children: List.generate(
+                    widget.duplicateChild,
+                    (index) => Padding(
+                      padding: EdgeInsets.only(
+                          bottom: shouldScroll && !widget.reverseScroll
+                              ? widget.gap
+                              : 0,
+                          top: shouldScroll && widget.reverseScroll
+                              ? widget.gap
+                              : 0),
+                      child: widget.child,
+                    ),
+                  ));
           },
         ),
       ),

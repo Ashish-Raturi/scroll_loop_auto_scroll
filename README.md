@@ -47,19 +47,22 @@ ScrollLoopAutoScroll(
    child: child, //required
    scrollDirection: Axis.horizontal, //required
    delay: Duration(seconds: 1),
-   duration: Duration(seconds: 10),
+   duration: Duration(seconds: 50),
    gap: 25,
-   reverseScroll: false
-   duplicateChild : 25
+   reverseScroll: false,
+   duplicateChild : 25,
+   enableScrollInput : true,
+   delayAfterScrollInput : Duration(seconds: 1)
  )
 ```
 
-## Improve Your Flutter Skills
+## More Level Up Your Flutter Skills
 
-Go to [www.gappsolution.com](https://www.gappsolution.com/login#mycourse) and learn all about payments.
+⭐️ Stripe In Flutter  [Link](https://gappsolution.com/course/stripe-in-flutter)
 
-[<img alt="alt_text" src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" />](https://www.gappsolution.com/login#mycourse)
-<!-- <img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/plugin copy.jpg" height="300" /> -->
+⭐️ Flutter In-App Purchase [Link](https://gappsolution.com/course/learn-flutter-in-app-purchase)
+
+⭐️ Flutter In-App Subscription  [Link](https://gappsolution.com/course/learn-flutter-in-app-subscriptions)
 
 ## License
 
