@@ -2,21 +2,24 @@
 
 This widget automatically scrolls the custom child widget to an infinite loop.
 
-## Example
+## Examples
+
+<img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/stockIndexLoop.gif" height="100" width="300" />
+
 
 <img src="https://github.com/Ashish-Raturi/scroll_loop_auto_scroll/raw/master/doc/example.gif" height="600" />
 
 ## Features
+* User scroll input 🆕
 * Infinite Auto Scroll
 * Custom child widgets
-* Delay after every round
 * Custom scroll direction
 * Specifying custom durations and gap
 * Like for more features
 
 ## Installation
 
-Add `scroll_loop_auto_scroll: ^0.0.4` to your `pubspec.yaml` dependencies. And import it:
+Add `scroll_loop_auto_scroll: ^0.0.5` to your `pubspec.yaml` dependencies. And import it:
 
 ```dart
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
@@ -44,13 +47,22 @@ ScrollLoopAutoScroll(
    child: child, //required
    scrollDirection: Axis.horizontal, //required
    delay: Duration(seconds: 1),
-   disableAnimation: false,
    duration: Duration(seconds: 10),
    gap: 25,
-   pause: Duration(seconds: 5),
-   reverseScroll: false
+   reverseScroll: false,
+   duplicateChild : 25,
+   enableScrollInput : true,
+   delayAfterScrollInput : Duration(seconds: 1)
  )
 ```
+
+## More Level Up Your Flutter Skills
+
+⭐️ Stripe In Flutter  [Link](https://gappsolution.com/course/stripe-in-flutter)
+
+⭐️ Flutter In-App Purchase [Link](https://gappsolution.com/course/learn-flutter-in-app-purchase)
+
+⭐️ Flutter In-App Subscription  [Link](https://gappsolution.com/course/learn-flutter-in-app-subscriptions)
 
 ## License
 
