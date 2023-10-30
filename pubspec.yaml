@@ -1,6 +1,6 @@
 name: scroll_loop_auto_scroll
 description: This widget automatically scrolls the custom child widget to an infinite loop.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/Ashish-Raturi/scroll_loop_auto_scroll
 
 environment:

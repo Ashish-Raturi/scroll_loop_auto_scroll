@@ -69,6 +69,7 @@ class ScrollLoopAutoScroll extends StatefulWidget {
   /// Default set to Duration(seconds: 1).
   ///
   final Duration delayAfterScrollInput;
+
   @override
   State<ScrollLoopAutoScroll> createState() => _ScrollLoopAutoScrollState();
 }
@@ -91,7 +92,9 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
           animationController.stop();
         } else {
           await Future.delayed(widget.delayAfterScrollInput);
-          animationHandler();
+          if (mounted) {
+            animationHandler();
+          }
         }
       }
     });
@@ -114,7 +117,9 @@ class _ScrollLoopAutoScrollState extends State<ScrollLoopAutoScroll>
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await Future.delayed(widget.delay);
-      animationHandler();
+      if (mounted) {
+        animationHandler();
+      }
     });
 
     super.initState();

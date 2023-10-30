@@ -1,3 +1,6 @@
+## v0.0.6
+
+* Fix ScrollController listener invokes callback post-disposal leading to errors
 
 ## v0.0.4
 
